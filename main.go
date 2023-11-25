@@ -5,7 +5,6 @@ import (
 	"io"
 	"log"
 	"os"
-	"strconv"
 
 	"github.com/pkg/sftp"
 	"github.com/spf13/cobra"
@@ -23,10 +22,6 @@ var (
 	version  string = "1.0.0"
 )
 
-func escape(input string) string {
-	return strconv.QuoteToASCII(input)[1 : len(input)+1]
-}
-
 var rootCmd = &cobra.Command{
 	Use:   "copier",
 	Short: fmt.Sprintf("Upload a file to an SFTP server. Version %s", version),
@@ -35,7 +30,7 @@ var rootCmd = &cobra.Command{
 		config := &ssh.ClientConfig{
 			User: username,
 			Auth: []ssh.AuthMethod{
-				ssh.Password(escape(password)),
+				ssh.Password(password),
 			},
 			HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 		}
