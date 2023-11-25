@@ -24,7 +24,7 @@ var (
 )
 
 func escape(input string) string {
-	return strconv.QuoteToASCII(input)
+	return strconv.QuoteToASCII(input)[1 : len(input)+1]
 }
 
 var rootCmd = &cobra.Command{
